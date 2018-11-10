@@ -1,4 +1,4 @@
 package net.hacbase.elitebot.save;
 
-public class FileEliteSaveSystem {
+public class FileEliteSaveSystem implements EliteSaveSystem {
 }

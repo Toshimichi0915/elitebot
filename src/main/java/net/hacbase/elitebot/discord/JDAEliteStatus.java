@@ -1,4 +1,4 @@
 package net.hacbase.elitebot.discord;
 
-public class JDAEliteStatus {
+public class JDAEliteStatus implements EliteStatus {
 }

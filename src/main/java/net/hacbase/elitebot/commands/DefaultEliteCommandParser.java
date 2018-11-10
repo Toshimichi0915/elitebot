@@ -1,4 +1,4 @@
 package net.hacbase.elitebot.commands;
 
-public class DefaultEliteCommandParser {
+public class DefaultEliteCommandParser implements EliteCommandParser{
 }

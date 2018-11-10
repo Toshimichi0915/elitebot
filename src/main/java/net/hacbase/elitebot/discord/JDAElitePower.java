@@ -1,4 +1,4 @@
 package net.hacbase.elitebot.discord;
 
-public class JDAElitePower {
+public class JDAElitePower implements ElitePower {
 }

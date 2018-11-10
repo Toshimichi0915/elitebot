@@ -1,4 +1,4 @@
 package net.hacbase.elitebot.discord;
 
-public class DefaultEliteStatuses {
+public class DefaultEliteStatuses implements EliteStatuses{
 }

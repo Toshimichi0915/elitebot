@@ -1,4 +1,4 @@
 package net.hacbase.elitebot.receiver;
 
-public class JDAEliteReceiver {
+public class JDAEliteReceiver implements EliteReceiver {
 }
