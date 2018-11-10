@@ -23,7 +23,8 @@ public class EliteBot {
     private final ElitePowers powers;
     private final EliteStatuses statuses;
     private final EliteCommands commands;
-    private final EliteSaveSystem saveSystem;
+    private final EliteSaveSystem powerSave;
+    private final EliteSaveSystem statusSave;
     private final EliteReceiver receiver;
 
     public JDA getJda() {
@@ -46,8 +47,12 @@ public class EliteBot {
         return commands;
     }
 
-    public EliteSaveSystem getSaveSystem() {
-        return saveSystem;
+    public EliteSaveSystem getPowerSaveSystem() {
+        return powerSave;
+    }
+
+    public EliteSaveSystem getStatusSaveSystem() {
+        return statusSave;
     }
 
     public EliteReceiver getReceiver() {
@@ -60,7 +65,8 @@ public class EliteBot {
         powers = new DefaultElitePowers();
         statuses = new DefaultEliteStatuses();
         commands = new DefaultEliteCommands();
-        saveSystem = new FileEliteSaveSystem();
+        powerSave = new FileEliteSaveSystem();
+        statusSave = new FileEliteSaveSystem();
         receiver = new JDAEliteReceiver();
     }
 }
