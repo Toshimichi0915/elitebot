@@ -9,8 +9,8 @@ import net.hacbase.elitebot.discord.DefaultElitePowers;
 import net.hacbase.elitebot.discord.DefaultEliteStatuses;
 import net.hacbase.elitebot.discord.ElitePowers;
 import net.hacbase.elitebot.discord.EliteStatuses;
-import net.hacbase.elitebot.receiver.EliteReceiver;
-import net.hacbase.elitebot.receiver.JDAEliteReceiver;
+import net.hacbase.elitebot.discord.EliteReceiver;
+import net.hacbase.elitebot.discord.JDAEliteReceiver;
 import net.hacbase.elitebot.save.EliteSaveSystem;
 import net.hacbase.elitebot.save.FileEliteSaveSystem;
 
@@ -45,14 +45,6 @@ public class EliteBot {
 
     public EliteCommands getCommands() {
         return commands;
-    }
-
-    public EliteSaveSystem getPowerSaveSystem() {
-        return powerSave;
-    }
-
-    public EliteSaveSystem getStatusSaveSystem() {
-        return statusSave;
     }
 
     public EliteReceiver getReceiver() {
