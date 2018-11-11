@@ -4,6 +4,7 @@ import net.dv8tion.jda.core.JDA;
 import net.dv8tion.jda.core.entities.Role;
 import net.hacbase.elitebot.save.EliteSimpleData;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -12,7 +13,7 @@ public class JDAEliteStatusProvider implements EliteStatusProvider {
     private final JDA jda;
     private final Set<EliteStatus> statuses;
 
-    public JDAEliteStatusProvider(JDA jda, Set<EliteSimpleData> data) {
+    public JDAEliteStatusProvider(JDA jda, Collection<EliteSimpleData> data) {
         this.jda = jda;
         this.statuses = new HashSet<>();
         for (EliteSimpleData element : data) {

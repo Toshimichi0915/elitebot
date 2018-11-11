@@ -5,16 +5,12 @@ import net.dv8tion.jda.core.JDABuilder;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.hacbase.elitebot.commands.DefaultEliteCommandProvider;
 import net.hacbase.elitebot.commands.EliteCommandProvider;
-import net.hacbase.elitebot.discord.DefaultElitePowerProvider;
-import net.hacbase.elitebot.discord.DefaultEliteStatusProvider;
-import net.hacbase.elitebot.discord.ElitePowerProvider;
-import net.hacbase.elitebot.discord.EliteStatusProvider;
-import net.hacbase.elitebot.discord.EliteReceiver;
-import net.hacbase.elitebot.discord.JDAEliteReceiver;
+import net.hacbase.elitebot.discord.*;
 import net.hacbase.elitebot.save.EliteSaveSystem;
 import net.hacbase.elitebot.save.FileEliteSaveSystem;
 
 import javax.security.auth.login.LoginException;
+import java.io.File;
 
 public class EliteBot {
 
@@ -51,14 +47,16 @@ public class EliteBot {
         return receiver;
     }
 
-    public EliteBot(String accessToken, String channelId) throws LoginException {
+    public EliteBot(String accessToken, String channelId, File powerFile, File statusFile) throws LoginException {
         jda = new JDABuilder(accessToken).build();
         channel = jda.getTextChannelById(channelId);
-        powers = new DefaultElitePowerProvider();
-        statuses = new DefaultEliteStatusProvider();
+        powerSave = new FileEliteSaveSystem(powerFile);
+        powerSave.load();
+        statusSave = new FileEliteSaveSystem(statusFile);
+        statusSave.load();
+        powers = new JDAElitePowerProvider(jda, powerSave.getEliteSimpleData());
+        statuses = new JDAEliteStatusProvider(jda, statusSave.getEliteSimpleData());
         commands = new DefaultEliteCommandProvider();
-        powerSave = new FileEliteSaveSystem();
-        statusSave = new FileEliteSaveSystem();
         receiver = new JDAEliteReceiver();
     }
 }
