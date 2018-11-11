@@ -1,4 +1,6 @@
 package net.hacbase.elitebot.discord;
 
-public interface EliteStatus {
+import net.hacbase.elitebot.save.EliteSimpleData;
+
+public interface EliteStatus extends EliteSimpleData{
 }
