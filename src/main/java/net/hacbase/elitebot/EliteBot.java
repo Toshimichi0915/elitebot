@@ -23,27 +23,27 @@ public class EliteBot {
     private final EliteSaveSystem statusSave;
     private final EliteReceiver receiver;
 
-    public JDA getJda() {
+    public JDA getJDA() {
         return jda;
     }
 
-    public TextChannel getChannel() {
+    public TextChannel getTextChannel() {
         return channel;
     }
 
-    public ElitePowerProvider getPowers() {
+    public ElitePowerProvider getElitePowerProvider() {
         return powers;
     }
 
-    public EliteStatusProvider getStatuses() {
+    public EliteStatusProvider getEliteStatusProvider() {
         return statuses;
     }
 
-    public EliteCommandProvider getCommands() {
+    public EliteCommandProvider getEliteCommandProvider() {
         return commands;
     }
 
-    public EliteReceiver getReceiver() {
+    public EliteReceiver getEliteReceiver() {
         return receiver;
     }
 
