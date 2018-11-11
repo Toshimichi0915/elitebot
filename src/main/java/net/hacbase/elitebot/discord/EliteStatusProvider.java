@@ -1,9 +1,11 @@
 package net.hacbase.elitebot.discord;
 
-import java.util.Set;
+import java.util.Collection;
 
 public interface EliteStatusProvider {
     EliteStatus getEliteStatusByName(String name);
+
     EliteStatus getEliteStatusById(String id);
-    Set<EliteStatus> getEliteStatuses();
+
+    Collection<EliteStatus> getEliteStatuses();
 }

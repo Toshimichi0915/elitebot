@@ -1,9 +1,11 @@
 package net.hacbase.elitebot.discord;
 
-import java.util.Set;
+import java.util.Collection;
 
 public interface ElitePowerProvider {
     ElitePower getElitePowerByName(String name);
+
     ElitePower getElitePowerById(String id);
-    Set<ElitePower> getElitePowers();
+
+    Collection<ElitePower> getElitePowers();
 }
