@@ -16,17 +16,17 @@ public class JDAElitePowerProvider implements ElitePowerProvider {
     public JDAElitePowerProvider(JDA jda, Collection<EliteSimpleData> data) {
         this.jda = jda;
         this.powers = new HashSet<>();
-        for(EliteSimpleData element : data) {
+        for (EliteSimpleData element : data) {
             Role role = jda.getRoleById(element.getId());
-            if(role == null) continue;
+            if (role == null) continue;
             this.powers.add(new JDAElitePower(role.getName(), role.getId()));
         }
     }
 
     @Override
     public ElitePower getElitePowerByName(String name) {
-        for(ElitePower power : powers) {
-            if(power.getName().equals(name))
+        for (ElitePower power : powers) {
+            if (power.getName().equals(name))
                 return power;
         }
         return null;
@@ -34,8 +34,8 @@ public class JDAElitePowerProvider implements ElitePowerProvider {
 
     @Override
     public ElitePower getElitePowerById(String id) {
-        for(ElitePower power : powers) {
-            if(power.getId().equals(id))
+        for (ElitePower power : powers) {
+            if (power.getId().equals(id))
                 return power;
         }
         return null;

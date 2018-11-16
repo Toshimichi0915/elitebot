@@ -1,6 +1,6 @@
 package net.hacbase.elitebot.save;
 
-public class DefaultEliteSimpleData implements EliteSimpleData{
+public class DefaultEliteSimpleData implements EliteSimpleData {
 
     private final String name;
     private final String id;

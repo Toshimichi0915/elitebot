@@ -19,7 +19,7 @@ public class JDAEliteReceiver extends ListenerAdapter implements EliteReceiver {
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
         EliteUser user = new JDAEliteUser(bot, event.getMember());
-        listeners.forEach(l->l.onReceived(user, event.getMessage().getContentDisplay()));
+        listeners.forEach(l -> l.onReceived(user, event.getMessage().getContentDisplay()));
     }
 
     @Override
