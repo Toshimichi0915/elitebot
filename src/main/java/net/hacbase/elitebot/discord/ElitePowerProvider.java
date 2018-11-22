@@ -1,5 +1,7 @@
 package net.hacbase.elitebot.discord;
 
+import net.hacbase.elitebot.save.EliteSimpleData;
+
 import java.util.Collection;
 
 public interface ElitePowerProvider {
@@ -8,4 +10,6 @@ public interface ElitePowerProvider {
     ElitePower getElitePowerById(String id);
 
     Collection<ElitePower> getElitePowers();
+
+    boolean addElitePower(EliteSimpleData data);
 }

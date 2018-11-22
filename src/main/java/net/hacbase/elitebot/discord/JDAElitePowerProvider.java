@@ -16,11 +16,8 @@ public class JDAElitePowerProvider implements ElitePowerProvider {
     public JDAElitePowerProvider(JDA jda, Collection<EliteSimpleData> data) {
         this.jda = jda;
         this.powers = new HashSet<>();
-        for (EliteSimpleData element : data) {
-            Role role = jda.getRoleById(element.getId());
-            if (role == null) continue;
-            this.powers.add(new JDAElitePower(role.getName(), role.getId()));
-        }
+        for (EliteSimpleData element : data)
+            addElitePower(element);
     }
 
     @Override
@@ -44,6 +41,14 @@ public class JDAElitePowerProvider implements ElitePowerProvider {
     @Override
     public Set<ElitePower> getElitePowers() {
         return new HashSet<>(powers);
+    }
+
+    @Override
+    public boolean addElitePower(EliteSimpleData data) {
+        Role role = jda.getRoleById(data.getId());
+        if (role == null) return false;
+        this.powers.add(new JDAElitePower(role.getName(), role.getId()));
+        return true;
     }
 
     public static class JDAElitePower implements ElitePower {

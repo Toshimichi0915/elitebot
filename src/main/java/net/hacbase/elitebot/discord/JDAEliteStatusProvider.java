@@ -16,10 +16,8 @@ public class JDAEliteStatusProvider implements EliteStatusProvider {
     public JDAEliteStatusProvider(JDA jda, Collection<EliteSimpleData> data) {
         this.jda = jda;
         this.statuses = new HashSet<>();
-        for (EliteSimpleData element : data) {
-            Role role = jda.getRoleById(element.getId());
-            this.statuses.add(new JDAEliteStatus(role.getName(), role.getId()));
-        }
+        for (EliteSimpleData element : data)
+            addEliteStatus(element);
     }
 
     @Override
@@ -43,6 +41,14 @@ public class JDAEliteStatusProvider implements EliteStatusProvider {
     @Override
     public Set<EliteStatus> getEliteStatuses() {
         return new HashSet<>(statuses);
+    }
+
+    @Override
+    public boolean addEliteStatus(EliteSimpleData data) {
+        Role role = jda.getRoleById(data.getId());
+        if(role == null) return false;
+        this.statuses.add(new JDAEliteStatus(role.getName(), role.getId()));
+        return true;
     }
 
     public static class JDAEliteStatus implements EliteStatus {
