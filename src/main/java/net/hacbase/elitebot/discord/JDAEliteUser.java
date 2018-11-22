@@ -78,6 +78,11 @@ public class JDAEliteUser implements EliteUser {
     }
 
     @Override
+    public void sendMessage(String message) {
+        bot.getTextChannel().sendMessage(getNickName() + ">" + message).queue();
+    }
+
+    @Override
     public String getName() {
         return member.getUser().getName();
     }
