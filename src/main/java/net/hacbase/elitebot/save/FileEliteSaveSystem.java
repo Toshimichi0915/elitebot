@@ -31,7 +31,7 @@ public class FileEliteSaveSystem implements EliteSaveSystem {
         data.clear();
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
-            while (!(line = reader.readLine()).equals("")) {
+            while ((line = reader.readLine()) != null && !line.equals("")) {
                 String[] split = line.split(" : ");
                 data.add(new DefaultEliteSimpleData(split[0], split[1]));
             }

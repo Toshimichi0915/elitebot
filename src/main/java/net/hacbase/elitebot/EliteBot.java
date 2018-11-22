@@ -6,7 +6,6 @@ import net.dv8tion.jda.core.entities.TextChannel;
 import net.hacbase.elitebot.commands.DefaultEliteCommandProvider;
 import net.hacbase.elitebot.commands.EliteCommandProvider;
 import net.hacbase.elitebot.discord.*;
-import net.hacbase.elitebot.save.EliteSaveSystem;
 import net.hacbase.elitebot.save.FileEliteSaveSystem;
 
 import javax.security.auth.login.LoginException;
@@ -16,12 +15,12 @@ public class EliteBot {
 
     private final JDA jda;
     private final TextChannel channel;
-    private final ElitePowerProvider powers;
-    private final EliteStatusProvider statuses;
-    private final EliteCommandProvider commands;
-    private final EliteSaveSystem powerSave;
-    private final EliteSaveSystem statusSave;
-    private final EliteReceiver receiver;
+    private final JDAElitePowerProvider powers;
+    private final JDAEliteStatusProvider statuses;
+    private final DefaultEliteCommandProvider provider;
+    private final FileEliteSaveSystem powerSave;
+    private final FileEliteSaveSystem statusSave;
+    private final JDAEliteReceiver receiver;
 
     public EliteBot(String accessToken, String channelId, File powerFile, File statusFile) throws LoginException {
         jda = new JDABuilder(accessToken).build();
@@ -32,8 +31,20 @@ public class EliteBot {
         statusSave.load();
         powers = new JDAElitePowerProvider(jda, powerSave.getEliteSimpleData());
         statuses = new JDAEliteStatusProvider(jda, statusSave.getEliteSimpleData());
-        commands = new DefaultEliteCommandProvider();
+        provider = new DefaultEliteCommandProvider();
         receiver = new JDAEliteReceiver(this);
+
+        receiver.addListener(new JDACommandEliteListener(this));
+        jda.addEventListener(receiver);
+
+    }
+
+    public static void main(String[] args) throws Exception {
+        File power = new File("./power.txt");
+        power.createNewFile();
+        File status = new File("./status.txt");
+        status.createNewFile();
+        EliteBot bot = new EliteBot(args[0], args[1], power, status);
     }
 
     public JDA getJDA() {
@@ -53,7 +64,7 @@ public class EliteBot {
     }
 
     public EliteCommandProvider getEliteCommandProvider() {
-        return commands;
+        return provider;
     }
 
     public EliteReceiver getEliteReceiver() {

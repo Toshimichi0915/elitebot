@@ -8,6 +8,10 @@ public class DefaultEliteCommandProvider implements EliteCommandProvider {
 
     private final Set<EliteCommand> cmds = new HashSet<>();
 
+    public void addCommand(EliteCommand cmd) {
+        cmds.add(cmd);
+    }
+
     @Override
     public EliteCommand getCommand(String prefix) {
         for (EliteCommand cmd : cmds) {

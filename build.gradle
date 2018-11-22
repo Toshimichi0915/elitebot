@@ -1,9 +1,28 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "com.github.jengelman.gradle.plugins:shadow:2.0.2"
+    }
+}
+
 group 'net.hacbase'
 version '1.0'
 
 apply plugin: 'java'
+apply plugin: "com.github.johnrengelman.shadow"
 
 sourceCompatibility = 1.8
+
+configurations {
+    network
+    compile.extendsFrom(network)
+}
+
+shadowJar {
+    configurations = [project.configurations.network]
+}
 
 repositories {
     mavenCentral()
@@ -12,5 +31,11 @@ repositories {
 
 dependencies {
     testCompile 'junit:junit:4.12'
-    compile 'net.dv8tion:JDA:3.8.1_439'
+    network 'net.dv8tion:JDA:3.8.1_439'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'net.hacbase.elitebot.EliteBot'
+    }
 }
