@@ -12,4 +12,6 @@ public interface ElitePowerProvider {
     Collection<ElitePower> getElitePowers();
 
     boolean addElitePower(EliteSimpleData data);
+
+    boolean removeElitePower(ElitePower power);
 }

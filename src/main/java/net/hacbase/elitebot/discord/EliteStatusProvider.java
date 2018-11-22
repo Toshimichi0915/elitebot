@@ -12,4 +12,6 @@ public interface EliteStatusProvider {
     Collection<EliteStatus> getEliteStatuses();
 
     boolean addEliteStatus(EliteSimpleData data);
+
+    boolean removeEliteStatus(EliteStatus status);
 }

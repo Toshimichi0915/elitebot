@@ -47,8 +47,13 @@ public class JDAElitePowerProvider implements ElitePowerProvider {
     public boolean addElitePower(EliteSimpleData data) {
         Role role = jda.getRoleById(data.getId());
         if (role == null) return false;
-        this.powers.add(new JDAElitePower(role.getName(), role.getId()));
+        powers.add(new JDAElitePower(role.getName(), role.getId()));
         return true;
+    }
+
+    @Override
+    public boolean removeElitePower(ElitePower power) {
+        return powers.remove(power);
     }
 
     public static class JDAElitePower implements ElitePower {
