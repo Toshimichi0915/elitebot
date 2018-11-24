@@ -6,6 +6,8 @@ import net.dv8tion.jda.core.entities.Role;
 import net.dv8tion.jda.core.entities.TextChannel;
 import net.hacbase.elitebot.commands.DefaultEliteCommandProvider;
 import net.hacbase.elitebot.commands.EliteCommandProvider;
+import net.hacbase.elitebot.commands.PowerChangeCommand;
+import net.hacbase.elitebot.commands.ShutdownCommand;
 import net.hacbase.elitebot.discord.*;
 import net.hacbase.elitebot.save.EliteSaveSystem;
 import net.hacbase.elitebot.save.FileEliteSaveSystem;
@@ -25,8 +27,8 @@ public class EliteBot {
     private final EliteReceiver receiver;
     private final Role adminRole;
 
-    public EliteBot(String accessToken, String channelId, File powerFile, File statusFile, String adminRoleId) throws LoginException {
-        jda = new JDABuilder(accessToken).build();
+    public EliteBot(String accessToken, String channelId, File powerFile, File statusFile, String adminRoleId) throws LoginException, InterruptedException {
+        jda = new JDABuilder(accessToken).buildBlocking();
         channel = jda.getTextChannelById(channelId);
         powerSave = new FileEliteSaveSystem(powerFile);
         powerSave.load();
@@ -34,7 +36,10 @@ public class EliteBot {
         statusSave.load();
         powers = new JDAElitePowerProvider(jda, powerSave.getEliteSimpleData());
         statuses = new JDAEliteStatusProvider(jda, statusSave.getEliteSimpleData());
-        provider = new DefaultEliteCommandProvider();
+        DefaultEliteCommandProvider provider = new DefaultEliteCommandProvider();
+        provider.addCommand(new PowerChangeCommand(this));
+        provider.addCommand(new ShutdownCommand(this));
+        this.provider = provider;
         receiver = new JDAEliteReceiver(this);
         adminRole = jda.getRoleById(adminRoleId);
 

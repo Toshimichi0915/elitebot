@@ -17,4 +17,6 @@ public interface EliteUser extends EliteSimpleData {
     boolean setEliteStatuses(Collection<EliteStatus> statuses);
 
     void sendMessage(String message);
+
+    boolean isAdmin();
 }
