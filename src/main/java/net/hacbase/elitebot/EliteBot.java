@@ -27,7 +27,7 @@ public class EliteBot {
     private final EliteReceiver receiver;
     private final Role adminRole;
 
-    public EliteBot(String accessToken, String channelId, File powerFile, File statusFile, String adminRoleId) throws LoginException, InterruptedException {
+    public EliteBot(String accessToken, String channelId, File powerFile, File statusFile, String adminRoleName) throws LoginException, InterruptedException {
         jda = new JDABuilder(accessToken).buildBlocking();
         channel = jda.getTextChannelById(channelId);
         powerSave = new FileEliteSaveSystem(powerFile);
@@ -41,7 +41,7 @@ public class EliteBot {
         provider.addCommand(new ShutdownCommand(this));
         this.provider = provider;
         receiver = new JDAEliteReceiver(this);
-        adminRole = jda.getRoleById(adminRoleId);
+        adminRole = jda.getRolesByName(adminRoleName, true).get(0);
 
         receiver.addListener(new JDACommandEliteListener(this));
         jda.addEventListener(receiver);
