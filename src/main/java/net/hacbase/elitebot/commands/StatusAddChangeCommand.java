@@ -33,6 +33,6 @@ public class StatusAddChangeCommand implements EliteCommand {
         Collection<EliteStatus> changed = user.getEliteStatuses();
         changed.add(status);
         user.setEliteStatuses(changed);
-        user.sendMessage("状態の追加変更に成功しました");
+        user.sendMessage("状態を追加変更しました");
     }
 }

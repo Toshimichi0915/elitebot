@@ -34,6 +34,6 @@ public class StatusReleaseChangeCommand implements EliteCommand{
         Collection<EliteStatus> changed = user.getEliteStatuses();
         changed.remove(status);
         user.setEliteStatuses(changed);
-        user.sendMessage("状態の解除変更に成功しました");
+        user.sendMessage("状態を解除変更しました");
     }
 }

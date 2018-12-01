@@ -29,6 +29,6 @@ public class PowerChangeCommand implements EliteCommand{
             return;
         }
         user.setElitePower(power);
-        user.sendMessage("勢力の変更に成功しました");
+        user.sendMessage("勢力を変更しました");
     }
 }
