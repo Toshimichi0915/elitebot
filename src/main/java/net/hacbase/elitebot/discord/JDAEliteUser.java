@@ -4,10 +4,7 @@ import net.dv8tion.jda.core.entities.Member;
 import net.dv8tion.jda.core.entities.Role;
 import net.hacbase.elitebot.EliteBot;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class JDAEliteUser implements EliteUser {
 
@@ -34,19 +31,19 @@ public class JDAEliteUser implements EliteUser {
     @Override
     public boolean setElitePower(ElitePower power) {
         ElitePower current = getElitePower();
-        List<Role> roles = member.getRoles();
-        if (power == null) {
-            roles.removeIf(r -> r.getId().equals(current.getId()));
-            member.getGuild().getController().modifyMemberRoles(member, roles.toArray(new Role[0]));
-            return true;
-        }
+        List<Role> add = new ArrayList<>();
+        List<Role> remove = new ArrayList<>();
 
+        if (power == null && current == null)
+            return false;
         if (current != null)
-            roles.removeIf(r -> r.getId().equals(current.getId()));
-        roles.add(bot.getJDA().getRoleById(power.getId()));
+            remove.add(bot.getJDA().getRoleById(current.getId()));
+        if (power != null)
+            add.add(bot.getJDA().getRoleById(power.getId()));
 
-        member.getGuild().getController().modifyMemberRoles(member, roles.toArray(new Role[0])).queue();
+        member.getGuild().getController().modifyMemberRoles(member, add, remove).queue();
         return true;
+
     }
 
     @Override
