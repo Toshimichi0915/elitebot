@@ -1,15 +1,11 @@
 package net.hacbase.elitebot.commands;
 
-import net.dv8tion.jda.core.entities.Role;
 import net.hacbase.elitebot.EliteBot;
 import net.hacbase.elitebot.discord.EliteStatus;
 import net.hacbase.elitebot.discord.EliteStatusProvider;
 import net.hacbase.elitebot.discord.EliteUser;
-import net.hacbase.elitebot.save.DefaultEliteSimpleData;
 
-import java.util.List;
-
-public class StatusRemoveCommand extends AdminCommand{
+public class StatusRemoveCommand extends AdminCommand {
 
     private final EliteBot bot;
 
@@ -19,13 +15,13 @@ public class StatusRemoveCommand extends AdminCommand{
 
     @Override
     public void conduct(EliteUser admin, String[] args) {
-        if(args.length < 1) {
+        if (args.length < 1) {
             admin.sendMessage("削除する「状態」を指定してください");
             return;
         }
         EliteStatusProvider prov = bot.getEliteStatusProvider();
         EliteStatus status = prov.getEliteStatusByName(args[0]);
-        if(status == null) {
+        if (status == null) {
             admin.sendMessage("その「状態」は存在しません: " + args[0]);
             return;
         }

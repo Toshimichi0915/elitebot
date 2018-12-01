@@ -6,7 +6,7 @@ import net.hacbase.elitebot.discord.EliteUser;
 
 import java.util.Collection;
 
-public class StatusReleaseChangeCommand implements EliteCommand{
+public class StatusReleaseChangeCommand implements EliteCommand {
 
     private final EliteBot bot;
 

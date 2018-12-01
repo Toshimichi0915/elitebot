@@ -3,7 +3,7 @@ package net.hacbase.elitebot.commands;
 import net.hacbase.elitebot.EliteBot;
 import net.hacbase.elitebot.discord.EliteUser;
 
-public class ShutdownCommand extends AdminCommand{
+public class ShutdownCommand extends AdminCommand {
 
     private final EliteBot bot;
 

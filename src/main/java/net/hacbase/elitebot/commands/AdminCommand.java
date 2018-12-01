@@ -2,10 +2,10 @@ package net.hacbase.elitebot.commands;
 
 import net.hacbase.elitebot.discord.EliteUser;
 
-abstract public class AdminCommand implements EliteCommand{
+abstract public class AdminCommand implements EliteCommand {
     @Override
     public void execute(EliteUser user, String[] args) {
-        if(!user.isAdmin()) {
+        if (!user.isAdmin()) {
             user.sendMessage("管理者以外にはこのコマンドは使用不可能です");
             return;
         }

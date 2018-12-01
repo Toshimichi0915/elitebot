@@ -55,6 +55,21 @@ public class EliteBot {
         getTextChannel().sendMessage("EliteBotが起動しました").queue();
     }
 
+    public static void main(String[] args) throws Exception {
+        File power = new File("./power.txt");
+        power.createNewFile();
+        File status = new File("./status.txt");
+        status.createNewFile();
+        File settings = new File("./settings.txt");
+        settings.createNewFile();
+        EliteSaveSystem s = new FileEliteSaveSystem(settings);
+        s.load();
+        String accessToken = s.getEliteSimpleDataByName("accessToken").getId();
+        String channelId = s.getEliteSimpleDataByName("channelId").getId();
+        String adminGroup = s.getEliteSimpleDataByName("adminRole").getId();
+        EliteBot bot = new EliteBot(accessToken, channelId, power, status, adminGroup);
+    }
+
     public JDA getJDA() {
         return jda;
     }
@@ -94,20 +109,5 @@ public class EliteBot {
 
     public void shutdown() {
         jda.shutdown();
-    }
-
-    public static void main(String[] args) throws Exception {
-        File power = new File("./power.txt");
-        power.createNewFile();
-        File status = new File("./status.txt");
-        status.createNewFile();
-        File settings = new File("./settings.txt");
-        settings.createNewFile();
-        EliteSaveSystem s = new FileEliteSaveSystem(settings);
-        s.load();
-        String accessToken = s.getEliteSimpleDataByName("accessToken").getId();
-        String channelId = s.getEliteSimpleDataByName("channelId").getId();
-        String adminGroup = s.getEliteSimpleDataByName("adminRole").getId();
-        EliteBot bot = new EliteBot(accessToken, channelId, power, status, adminGroup);
     }
 }

@@ -7,7 +7,7 @@ import net.hacbase.elitebot.save.DefaultEliteSimpleData;
 
 import java.util.List;
 
-public class StatusAddCommand extends AdminCommand{
+public class StatusAddCommand extends AdminCommand {
 
     private final EliteBot bot;
 
@@ -17,12 +17,12 @@ public class StatusAddCommand extends AdminCommand{
 
     @Override
     public void conduct(EliteUser admin, String[] args) {
-        if(args.length < 1) {
+        if (args.length < 1) {
             admin.sendMessage("追加する「状態」を指定してください");
             return;
         }
         List<Role> r = bot.getJDA().getRolesByName(args[0], true);
-        if(r.size() == 0) {
+        if (r.size() == 0) {
             admin.sendMessage("その「状態」は存在しません: " + args[0]);
             return;
         }
