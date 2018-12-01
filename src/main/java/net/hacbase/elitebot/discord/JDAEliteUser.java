@@ -61,16 +61,23 @@ public class JDAEliteUser implements EliteUser {
 
     @Override
     public boolean setEliteStatuses(Collection<EliteStatus> statuses) {
-        Set<Role> update = new HashSet<>();
+        List<Role> now = new ArrayList<>(member.getRoles());
+        now.removeIf(r -> bot.getEliteStatusProvider().getEliteStatusById(r.getId()) == null);
+        List<Role> converted = new ArrayList<>();
         for (EliteStatus status : statuses) {
-            Role role = bot.getJDA().getRoleById(status.getId());
-            if (role == null) return false;
-            update.add(role);
+            Role r = bot.getJDA().getRoleById(status.getId());
+            if (r == null) return false;
+            converted.add(r);
         }
-        ElitePower power = getElitePower();
-        if (power != null)
-            update.add(bot.getJDA().getRoleById(power.getId()));
-        member.getGuild().getController().modifyMemberRoles(member, update.toArray(new Role[0])).queue();
+
+        List<Role> added = new ArrayList<>(converted);
+        added.removeAll(now);
+
+        List<Role> removed = new ArrayList<>(now);
+        removed.removeAll(converted);
+
+        member.getGuild().getController().modifyMemberRoles(member, added, removed).queue();
+
         return true;
     }
 
