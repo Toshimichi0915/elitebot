@@ -4,7 +4,7 @@ import net.hacbase.elitebot.EliteBot;
 import net.hacbase.elitebot.discord.ElitePower;
 import net.hacbase.elitebot.discord.EliteUser;
 
-public class PowerChangeCommand implements EliteCommand {
+public class PowerChangeCommand implements EliteCommand, CommandDescription {
 
     private final EliteBot bot;
 
@@ -14,7 +14,7 @@ public class PowerChangeCommand implements EliteCommand {
 
     @Override
     public String getPrefix() {
-        return "?pp";
+        return "pp";
     }
 
     @Override
@@ -30,5 +30,10 @@ public class PowerChangeCommand implements EliteCommand {
         }
         user.setElitePower(power);
         user.sendMessage("勢力を変更しました");
+    }
+
+    @Override
+    public String getDescription() {
+        return "勢力を変更します";
     }
 }

@@ -3,7 +3,7 @@ package net.hacbase.elitebot.commands;
 import net.hacbase.elitebot.EliteBot;
 import net.hacbase.elitebot.discord.EliteUser;
 
-public class ShutdownCommand extends AdminCommand {
+public class ShutdownCommand extends AdminCommand implements CommandDescription{
 
     private final EliteBot bot;
 
@@ -13,7 +13,7 @@ public class ShutdownCommand extends AdminCommand {
 
     @Override
     public String getPrefix() {
-        return "?shutdown";
+        return "shutdown";
     }
 
     @Override
@@ -21,5 +21,10 @@ public class ShutdownCommand extends AdminCommand {
         admin.sendMessage("EliteBotを終了させます");
         bot.save();
         bot.shutdown();
+    }
+
+    @Override
+    public String getDescription() {
+        return "EliteBotを終了させます";
     }
 }

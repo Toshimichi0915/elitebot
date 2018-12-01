@@ -5,7 +5,7 @@ import net.hacbase.elitebot.discord.ElitePower;
 import net.hacbase.elitebot.discord.ElitePowerProvider;
 import net.hacbase.elitebot.discord.EliteUser;
 
-public class PowerRemoveCommand extends AdminCommand {
+public class PowerRemoveCommand extends AdminCommand implements CommandDescription {
 
     private final EliteBot bot;
 
@@ -31,6 +31,11 @@ public class PowerRemoveCommand extends AdminCommand {
 
     @Override
     public String getPrefix() {
-        return "?ppremove";
+        return "ppremove";
+    }
+
+    @Override
+    public String getDescription() {
+        return "勢力を削除します";
     }
 }

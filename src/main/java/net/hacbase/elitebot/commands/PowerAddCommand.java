@@ -7,7 +7,7 @@ import net.hacbase.elitebot.save.DefaultEliteSimpleData;
 
 import java.util.List;
 
-public class PowerAddCommand extends AdminCommand {
+public class PowerAddCommand extends AdminCommand implements CommandDescription{
 
     private final EliteBot bot;
 
@@ -32,6 +32,11 @@ public class PowerAddCommand extends AdminCommand {
 
     @Override
     public String getPrefix() {
-        return "?ppadd";
+        return "ppadd";
+    }
+
+    @Override
+    public String getDescription() {
+        return "勢力を追加します";
     }
 }

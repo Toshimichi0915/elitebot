@@ -18,8 +18,12 @@ public class JDACommandEliteListener implements EliteListener {
         String[] arr = msg.split("[\\s]+");
         String prefix = arr[0];
         String[] args = Arrays.copyOfRange(arr, 1, arr.length);
-        EliteCommand cmd = bot.getEliteCommandProvider().getCommand(prefix);
-        if (cmd == null) return;
+        if (!arr[0].startsWith("?")) return;
+        EliteCommand cmd = bot.getEliteCommandProvider().getCommand(prefix.substring(1, prefix.length()));
+        if(cmd == null) {
+            user.sendMessage("コマンドが存在しません ヘルプは ?help で表示できます");
+            return;
+        }
         cmd.execute(user, args);
     }
 }

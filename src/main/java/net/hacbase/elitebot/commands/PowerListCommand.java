@@ -7,7 +7,7 @@ import net.hacbase.elitebot.discord.EliteUser;
 
 import java.util.Collection;
 
-public class PowerListCommand implements EliteCommand {
+public class PowerListCommand implements EliteCommand, CommandDescription {
 
     private final EliteBot bot;
 
@@ -17,7 +17,7 @@ public class PowerListCommand implements EliteCommand {
 
     @Override
     public String getPrefix() {
-        return "?pplist";
+        return "pplist";
     }
 
     @Override
@@ -37,5 +37,10 @@ public class PowerListCommand implements EliteCommand {
             builder.append("人)\n");
         }
         user.sendMessage(builder.toString());
+    }
+
+    @Override
+    public String getDescription() {
+        return "現在の勢力一覧を表示します";
     }
 }

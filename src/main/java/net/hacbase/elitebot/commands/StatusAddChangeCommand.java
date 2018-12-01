@@ -6,7 +6,7 @@ import net.hacbase.elitebot.discord.EliteUser;
 
 import java.util.Collection;
 
-public class StatusAddChangeCommand implements EliteCommand {
+public class StatusAddChangeCommand implements EliteCommand, CommandDescription{
 
     private final EliteBot bot;
 
@@ -16,7 +16,7 @@ public class StatusAddChangeCommand implements EliteCommand {
 
     @Override
     public String getPrefix() {
-        return "?st";
+        return "st";
     }
 
     @Override
@@ -33,6 +33,11 @@ public class StatusAddChangeCommand implements EliteCommand {
         Collection<EliteStatus> changed = user.getEliteStatuses();
         changed.add(status);
         user.setEliteStatuses(changed);
-        user.sendMessage("状態を追加変更しました");
+        user.sendMessage("状態を変更しました");
+    }
+
+    @Override
+    public String getDescription() {
+        return "指定した状態に変更します 複数の状態が設定可能です";
     }
 }
