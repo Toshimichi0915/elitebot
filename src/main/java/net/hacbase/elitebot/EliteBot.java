@@ -46,6 +46,7 @@ public class EliteBot {
         receiver.addListener(new JDACommandEliteListener(this));
         jda.addEventListener(receiver);
 
+        getTextChannel().sendMessage("EliteBotが起動しました").queue();
     }
 
     public JDA getJDA() {
