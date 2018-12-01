@@ -35,6 +35,6 @@ public class StatusRemoveCommand extends AdminCommand{
 
     @Override
     public String getPrefix() {
-        return "?strem";
+        return "?stremove";
     }
 }
