@@ -19,6 +19,7 @@ public class ShutdownCommand extends AdminCommand{
     @Override
     public void conduct(EliteUser admin, String[] args) {
         admin.sendMessage("EliteBotを終了させます");
-        bot.getJDA().shutdown();
+        bot.save();
+        bot.shutdown();
     }
 }

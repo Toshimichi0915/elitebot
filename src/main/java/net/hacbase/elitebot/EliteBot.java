@@ -19,17 +19,19 @@ public class EliteBot {
     private final ElitePowerProvider powers;
     private final EliteStatusProvider statuses;
     private final EliteCommandProvider provider;
-    private final EliteSaveSystem powerSave;
-    private final EliteSaveSystem statusSave;
     private final EliteReceiver receiver;
     private final Role adminRole;
+    private final File powerFile;
+    private final File statusFile;
 
     public EliteBot(String accessToken, String channelId, File powerFile, File statusFile, String adminRoleName) throws LoginException, InterruptedException {
         jda = new JDABuilder(accessToken).buildBlocking();
         channel = jda.getTextChannelById(channelId);
-        powerSave = new FileEliteSaveSystem(powerFile);
+        this.powerFile = powerFile;
+        this.statusFile = statusFile;
+        EliteSaveSystem powerSave = new FileEliteSaveSystem(powerFile);
         powerSave.load();
-        statusSave = new FileEliteSaveSystem(statusFile);
+        EliteSaveSystem statusSave = new FileEliteSaveSystem(statusFile);
         statusSave.load();
         powers = new JDAElitePowerProvider(jda, powerSave.getEliteSimpleData());
         statuses = new JDAEliteStatusProvider(jda, statusSave.getEliteSimpleData());
@@ -74,6 +76,19 @@ public class EliteBot {
 
     public EliteReceiver getEliteReceiver() {
         return receiver;
+    }
+
+    public void save() {
+        EliteSaveSystem powerSave = new FileEliteSaveSystem(powerFile);
+        powers.getElitePowers().forEach(powerSave::addEliteSimpleData);
+        powerSave.save();
+        EliteSaveSystem statusSave = new FileEliteSaveSystem(statusFile);
+        statuses.getEliteStatuses().forEach(statusSave::addEliteSimpleData);
+        statusSave.save();
+    }
+
+    public void shutdown() {
+        jda.shutdown();
     }
 
     public static void main(String[] args) throws Exception {
