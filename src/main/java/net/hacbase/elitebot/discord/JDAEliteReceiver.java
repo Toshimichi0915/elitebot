@@ -18,6 +18,8 @@ public class JDAEliteReceiver extends ListenerAdapter implements EliteReceiver {
 
     @Override
     public void onMessageReceived(MessageReceivedEvent event) {
+        if(!event.getTextChannel().equals(bot.getTextChannel()))
+            return;
         EliteUser user = new JDAEliteUser(bot, event.getMember());
         listeners.forEach(l -> l.onReceived(user, event.getMessage().getContentDisplay()));
     }
