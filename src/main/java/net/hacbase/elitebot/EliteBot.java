@@ -41,6 +41,10 @@ public class EliteBot {
         provider.addCommand(new PowerAddCommand(this));
         provider.addCommand(new PowerRemoveCommand(this));
         provider.addCommand(new PowerListCommand(this));
+        provider.addCommand(new StatusAddChangeCommand(this));
+        provider.addCommand(new StatusReleaseChangeCommand(this));
+        provider.addCommand(new StatusAddCommand(this));
+        provider.addCommand(new StatusRemoveCommand(this));
         this.provider = provider;
         receiver = new JDAEliteReceiver(this);
         adminRole = jda.getRolesByName(adminRoleName, true).get(0);
