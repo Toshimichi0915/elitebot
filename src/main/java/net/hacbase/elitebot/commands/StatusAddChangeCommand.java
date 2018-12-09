@@ -25,9 +25,10 @@ public class StatusAddChangeCommand implements EliteCommand, CommandDescription{
             user.sendMessage("追加する状態を指定してください");
             return;
         }
-        EliteStatus status = bot.getEliteStatusProvider().getEliteStatusByName(args[0]);
+        String statusName = link(args, 0, args.length);
+        EliteStatus status = bot.getEliteStatusProvider().getEliteStatusByName(statusName);
         if (status == null) {
-            user.sendMessage("その状態は存在しません: " + args[0]);
+            user.sendMessage("その状態は存在しません: " + statusName);
             return;
         }
         Collection<EliteStatus> changed = user.getEliteStatuses();

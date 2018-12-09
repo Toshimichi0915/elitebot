@@ -18,7 +18,7 @@ public class FileEliteSaveSystem implements EliteSaveSystem {
     public void save() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
             for (EliteSimpleData element : data) {
-                writer.write(element.getName() + " : " + element.getId());
+                writer.write(element.getName() + " -:- " + element.getId());
                 writer.newLine();
             }
         } catch (IOException e) {
@@ -32,7 +32,7 @@ public class FileEliteSaveSystem implements EliteSaveSystem {
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = reader.readLine()) != null && !line.equals("")) {
-                String[] split = line.split(" : ");
+                String[] split = line.split(" -:- ");
                 data.add(new DefaultEliteSimpleData(split[0], split[1]));
             }
         } catch (IOException e) {

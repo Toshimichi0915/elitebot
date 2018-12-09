@@ -20,9 +20,10 @@ public class PowerRemoveCommand extends AdminCommand implements CommandDescripti
             return;
         }
         ElitePowerProvider prov = bot.getElitePowerProvider();
-        ElitePower power = prov.getElitePowerByName(args[0]);
+        String powerName = link(args, 0, args.length);
+        ElitePower power = prov.getElitePowerByName(powerName);
         if (power == null) {
-            admin.sendMessage("その勢力は存在しません: " + args[0]);
+            admin.sendMessage("その勢力は存在しません: " + powerName.length());
             return;
         }
         bot.getElitePowerProvider().removeElitePower(power);

@@ -23,9 +23,10 @@ public class PowerChangeCommand implements EliteCommand, CommandDescription {
             user.sendMessage("変更する勢力を指定してください");
             return;
         }
-        ElitePower power = bot.getElitePowerProvider().getElitePowerByName(args[0]);
+        String powerName = link(args, 0, args.length);
+        ElitePower power = bot.getElitePowerProvider().getElitePowerByName(powerName);
         if (power == null) {
-            user.sendMessage("その勢力は存在しません: " + args[0]);
+            user.sendMessage("その勢力は存在しません: " + powerName);
             return;
         }
         user.setElitePower(power);

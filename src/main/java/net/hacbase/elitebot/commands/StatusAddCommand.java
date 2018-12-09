@@ -21,9 +21,10 @@ public class StatusAddCommand extends AdminCommand implements CommandDescription
             admin.sendMessage("追加する状態を指定してください");
             return;
         }
-        List<Role> r = bot.getJDA().getRolesByName(args[0], true);
+        String statusName = link(args, 0, args.length);
+        List<Role> r = bot.getJDA().getRolesByName(statusName, true);
         if (r.size() == 0) {
-            admin.sendMessage("その状態は存在しません: " + args[0]);
+            admin.sendMessage("その状態は存在しません: " + statusName);
             return;
         }
         bot.getEliteStatusProvider().addEliteStatus(new DefaultEliteSimpleData(r.get(0).getName(), r.get(0).getId()));

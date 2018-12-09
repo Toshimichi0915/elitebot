@@ -19,10 +19,11 @@ public class StatusRemoveCommand extends AdminCommand implements CommandDescript
             admin.sendMessage("削除する状態を指定してください");
             return;
         }
+        String statusName = link(args, 0, args.length);
         EliteStatusProvider prov = bot.getEliteStatusProvider();
-        EliteStatus status = prov.getEliteStatusByName(args[0]);
+        EliteStatus status = prov.getEliteStatusByName(statusName);
         if (status == null) {
-            admin.sendMessage("その状態は存在しません: " + args[0]);
+            admin.sendMessage("その状態は存在しません: " + statusName);
             return;
         }
         prov.removeEliteStatus(status);
