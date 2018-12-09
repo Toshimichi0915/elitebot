@@ -23,7 +23,7 @@ public class PowerRemoveCommand extends AdminCommand implements CommandDescripti
         String powerName = link(args, 0, args.length);
         ElitePower power = prov.getElitePowerByName(powerName);
         if (power == null) {
-            admin.sendMessage("その勢力は存在しません: " + powerName.length());
+            admin.sendMessage("その勢力は存在しません: " + powerName);
             return;
         }
         bot.getElitePowerProvider().removeElitePower(power);

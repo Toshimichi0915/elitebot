@@ -47,6 +47,7 @@ public class JDAEliteStatusProvider implements EliteStatusProvider {
     public boolean addEliteStatus(EliteSimpleData data) {
         Role role = jda.getRoleById(data.getId());
         if (role == null) return false;
+        if(getEliteStatusById(data.getId()) != null) return false;
         statuses.add(new JDAEliteStatus(role.getName(), role.getId()));
         return true;
     }
