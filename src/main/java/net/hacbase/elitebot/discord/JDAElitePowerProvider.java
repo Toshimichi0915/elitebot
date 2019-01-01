@@ -23,7 +23,7 @@ public class JDAElitePowerProvider implements ElitePowerProvider {
     @Override
     public ElitePower getElitePowerByName(String name) {
         for (ElitePower power : powers) {
-            if (power.getName().equals(name))
+            if (power.getName().equalsIgnoreCase(name))
                 return power;
         }
         return null;

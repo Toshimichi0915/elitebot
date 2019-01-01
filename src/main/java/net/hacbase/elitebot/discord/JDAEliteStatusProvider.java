@@ -23,7 +23,7 @@ public class JDAEliteStatusProvider implements EliteStatusProvider {
     @Override
     public EliteStatus getEliteStatusByName(String name) {
         for (EliteStatus status : statuses) {
-            if (status.getName().equals(name))
+            if (status.getName().equalsIgnoreCase(name))
                 return status;
         }
         return null;
