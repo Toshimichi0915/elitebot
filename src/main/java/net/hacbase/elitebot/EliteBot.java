@@ -40,6 +40,7 @@ public class EliteBot {
         provider.addCommand(new ShutdownCommand(this));
         provider.addCommand(new PowerAddCommand(this));
         provider.addCommand(new PowerRemoveCommand(this));
+        provider.addCommand(new PowerReleaseCommand());
         provider.addCommand(new PowerListCommand(this));
         provider.addCommand(new StatusAddChangeCommand(this));
         provider.addCommand(new StatusReleaseChangeCommand(this));
