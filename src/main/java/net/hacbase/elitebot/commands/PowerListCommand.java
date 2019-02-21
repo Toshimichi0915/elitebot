@@ -61,8 +61,9 @@ class PowerCount implements Comparable<PowerCount> {
 
     void format(StringBuilder builder) {
         builder.append(this.count);
-        builder.append(" :  ");
+        builder.append("人 :  ");
         builder.append(this.name);
+        builder.append("\n");
     }
 
     String name() {
