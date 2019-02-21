@@ -7,6 +7,7 @@ import net.hacbase.elitebot.discord.EliteUser;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 
 public class PowerListCommand implements EliteCommand, CommandDescription {
 
@@ -36,6 +37,8 @@ public class PowerListCommand implements EliteCommand, CommandDescription {
             int count = r.getGuild().getMembersWithRoles(r).size();
             power_list.add(new PowerCount(name, count));
         }
+
+        Collections.sort(power_list);
 
         StringBuilder builder = new StringBuilder("現在の勢力一覧:\n");
         for (PowerCount count : power_list) {
@@ -75,7 +78,7 @@ class PowerCount implements Comparable<PowerCount> {
     }
 
     public int compareTo(PowerCount o) {
-        int d = this.count - o.count();
+        int d = o.count() - this.count;
         if (d != 0) {
             return d;
         }
