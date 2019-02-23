@@ -6,8 +6,7 @@ import net.hacbase.elitebot.discord.ElitePower;
 import net.hacbase.elitebot.discord.EliteUser;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
+import java.util.List;
 
 public class PowerListCommand implements EliteCommand, CommandDescription {
 
@@ -22,27 +21,25 @@ public class PowerListCommand implements EliteCommand, CommandDescription {
         return "pplist";
     }
 
+    private int countMembers(ElitePower power) {
+        Role r = bot.getJDA().getRoleById(power.getId());
+        return r.getGuild().getMembersWithRoles(r).size();
+    }
+
     @Override
     public void execute(EliteUser user, String[] args) {
-        Collection<ElitePower> powers = bot.getElitePowerProvider().getElitePowers();
+        List<ElitePower> powers = new ArrayList<>(bot.getElitePowerProvider().getElitePowers());
         if (powers.size() == 0) {
             user.sendMessage("現在有効な勢力は存在しません");
             return;
         }
-
-        ArrayList<PowerCount> power_list = new ArrayList<>();
-        for (ElitePower power : bot.getElitePowerProvider().getElitePowers()) {
-            String name = power.getName();
-            Role r = bot.getJDA().getRoleById(power.getId());
-            int count = r.getGuild().getMembersWithRoles(r).size();
-            power_list.add(new PowerCount(name, count));
-        }
-
-        Collections.sort(power_list);
-
+        powers.sort((e1, e2) -> Integer.compare(countMembers(e2), countMembers(e1)));
         StringBuilder builder = new StringBuilder("現在の勢力一覧:\n");
-        for (PowerCount count : power_list) {
-            count.format(builder);
+        for (ElitePower power : powers) {
+            builder.append(countMembers(power));
+            builder.append(": ");
+            builder.append(power.getName());
+            builder.append('\n');
         }
         user.sendMessage(builder.toString());
     }
@@ -50,39 +47,5 @@ public class PowerListCommand implements EliteCommand, CommandDescription {
     @Override
     public String getDescription() {
         return "現在の勢力一覧を表示します";
-    }
-}
-
-class PowerCount implements Comparable<PowerCount> {
-    private String name;
-    private int count;
-
-    PowerCount(String name, int count) {
-        this.name = name;
-        this.count = count;
-    }
-
-    void format(StringBuilder builder) {
-        builder.append(this.count);
-        builder.append("人 :  ");
-        builder.append(this.name);
-        builder.append("\n");
-    }
-
-    String name() {
-        return this.name;
-    }
-
-    int count() {
-        return this.count;
-    }
-
-    public int compareTo(PowerCount o) {
-        int d = o.count() - this.count;
-        if (d != 0) {
-            return d;
-        }
-
-        return this.name.compareTo(o.name());
     }
 }
