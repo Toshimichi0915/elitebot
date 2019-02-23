@@ -45,6 +45,7 @@ public class EliteBot {
         provider.addCommand(new StatusAddChangeCommand(this));
         provider.addCommand(new StatusReleaseChangeCommand(this));
         provider.addCommand(new StatusAddCommand(this));
+        provider.addCommand(new StatusListCommand(this));
         provider.addCommand(new StatusRemoveCommand(this));
         provider.addCommand(new HelpCommand(this));
         this.provider = provider;
