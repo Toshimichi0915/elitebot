@@ -55,6 +55,11 @@ public class EliteBot {
         jda.addEventListener(receiver);
 
         getTextChannel().sendMessage("EliteBotが起動しました").queue();
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            getTextChannel().sendMessage("EliteBotがホストコンピューター側により終了します").queue();
+            save();
+            shutdown();
+        }));
     }
 
     public static void main(String[] args) throws Exception {
@@ -69,7 +74,7 @@ public class EliteBot {
         String accessToken = s.getEliteSimpleDataByName("accessToken").getId();
         String channelId = s.getEliteSimpleDataByName("channelId").getId();
         String adminGroup = s.getEliteSimpleDataByName("adminRole").getId();
-        EliteBot bot = new EliteBot(accessToken, channelId, power, status, adminGroup);
+        new EliteBot(accessToken, channelId, power, status, adminGroup);
     }
 
     public JDA getJDA() {
