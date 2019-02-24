@@ -37,7 +37,7 @@ public class StatusListCommand implements EliteCommand {
         StringBuilder builder = new StringBuilder("現在の状態一覧:\n");
         for (EliteStatus status : statuses) {
             builder.append(countMembers(status));
-            builder.append(": ");
+            builder.append("人: ");
             builder.append(status.getName());
             builder.append('\n');
         }

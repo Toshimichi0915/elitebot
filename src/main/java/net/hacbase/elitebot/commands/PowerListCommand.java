@@ -37,7 +37,7 @@ public class PowerListCommand implements EliteCommand, CommandDescription {
         StringBuilder builder = new StringBuilder("現在の勢力一覧:\n");
         for (ElitePower power : powers) {
             builder.append(countMembers(power));
-            builder.append(": ");
+            builder.append("人: ");
             builder.append(power.getName());
             builder.append('\n');
         }
