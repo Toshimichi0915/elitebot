@@ -27,7 +27,7 @@ public class PowerAddCommand extends AdminCommand implements CommandDescription{
             admin.sendMessage("その勢力は存在しません: " + powerName);
             return;
         }
-        bot.getElitePowerProvider().addElitePower(new DefaultEliteSimpleData(r.get(0).getName(), r.get(0).getIdLong()));
+        bot.getElitePowerProvider().addElitePower(new DefaultEliteSimpleData(r.get(0).getName(), Long.toString(r.get(0).getIdLong())));
         admin.sendMessage("勢力を追加しました");
     }
 
