@@ -47,6 +47,6 @@ public class StatusReleaseChangeCommand implements EliteCommand, CommandDescript
 
     @Override
     public String getDescription() {
-        return "状態を解除します(allで状態を全解除します";
+        return "状態を解除します(allで状態を全解除します)";
     }
 }

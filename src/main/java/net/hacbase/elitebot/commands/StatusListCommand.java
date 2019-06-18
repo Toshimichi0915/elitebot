@@ -8,7 +8,7 @@ import net.hacbase.elitebot.discord.EliteUser;
 import java.util.ArrayList;
 import java.util.List;
 
-public class StatusListCommand implements EliteCommand {
+public class StatusListCommand implements EliteCommand, CommandDescription {
 
     private final EliteBot bot;
 
@@ -42,5 +42,10 @@ public class StatusListCommand implements EliteCommand {
             builder.append('\n');
         }
         user.sendMessage(builder.toString());
+    }
+
+    @Override
+    public String getDescription() {
+        return "状態の一覧を表示します";
     }
 }
