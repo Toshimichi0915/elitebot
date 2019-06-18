@@ -22,12 +22,14 @@ public class PowerAddCommand extends AdminCommand implements CommandDescription{
             return;
         }
         String powerName = link(args, 0, args.length);
-        List<Role> r = bot.getJDA().getRolesByName(powerName, true);
+        List<Role> r = bot.getTextChannel().getGuild().getRolesByName(powerName, true);
         if (r.size() == 0) {
             admin.sendMessage("その勢力は存在しません: " + powerName);
             return;
         }
-        bot.getElitePowerProvider().addElitePower(new DefaultEliteSimpleData(r.get(0).getName(), Long.toString(r.get(0).getIdLong())));
+        admin.sendMessage(r.get(0).getName());
+        admin.sendMessage(r.get(0).getId());
+        bot.getElitePowerProvider().addElitePower(new DefaultEliteSimpleData(r.get(0).getName(), r.get(0).getId()));
         admin.sendMessage("勢力を追加しました");
     }
 

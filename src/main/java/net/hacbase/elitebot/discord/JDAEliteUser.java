@@ -41,7 +41,8 @@ public class JDAEliteUser implements EliteUser {
         if (power != null)
             add.add(bot.getJDA().getRoleById(power.getId()));
 
-        member.getGuild().getController().modifyMemberRoles(member, add, remove).queue();
+//        member.getGuild().getController().modifyMemberRoles(member, add, remove).queue();
+        bot.getTextChannel().getGuild().getController().modifyMemberRoles(member, add, remove).queue();
         return true;
 
     }
