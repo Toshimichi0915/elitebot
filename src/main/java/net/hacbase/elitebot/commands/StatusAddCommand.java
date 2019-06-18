@@ -22,7 +22,7 @@ public class StatusAddCommand extends AdminCommand implements CommandDescription
             return;
         }
         String statusName = link(args, 0, args.length);
-        List<Role> r = bot.getJDA().getRolesByName(statusName, true);
+        List<Role> r = bot.getTextChannel().getGuild().getRolesByName(statusName, true);
         if (r.size() == 0) {
             admin.sendMessage("その状態は存在しません: " + statusName);
             return;
