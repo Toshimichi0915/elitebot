@@ -22,7 +22,7 @@ public class HelpCommand implements EliteCommand, CommandDescription {
         if (args.length < 1) {
             StringBuilder builder = new StringBuilder("コマンド一覧: \n");
             for (EliteCommand cmd : prov.getCommands()) {
-                if(user.isAdmin() && cmd instanceof AdminCommand)
+                if(!user.isAdmin() && cmd instanceof AdminCommand)
                     continue;
                 String name = cmd.getPrefix();
                 String desc = cmd instanceof CommandDescription ? ((CommandDescription) cmd).getDescription() : "詳細なし";
