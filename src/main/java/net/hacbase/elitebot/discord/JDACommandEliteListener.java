@@ -19,7 +19,7 @@ public class JDACommandEliteListener implements EliteListener {
         String prefix = arr[0];
         String[] args = Arrays.copyOfRange(arr, 1, arr.length);
         if (!arr[0].startsWith("?")) return;
-        EliteCommand cmd = bot.getEliteCommandProvider().getCommand(prefix.substring(1, prefix.length()));
+        EliteCommand cmd = bot.getEliteCommandProvider().getCommand(prefix.substring(1));
         if(cmd == null) {
             user.sendMessage("コマンドが存在しません ヘルプは ?help で表示できます");
             return;
