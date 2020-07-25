@@ -32,7 +32,7 @@ public class PowerRemoveCommand extends AdminCommand implements CommandDescripti
 
     @Override
     public String getPrefix() {
-        return "ppremove";
+        return "pr";
     }
 
     @Override

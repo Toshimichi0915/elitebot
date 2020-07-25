@@ -18,7 +18,7 @@ public class PowerListCommand implements EliteCommand, CommandDescription {
 
     @Override
     public String getPrefix() {
-        return "pplist";
+        return "pl";
     }
 
     private int countMembers(ElitePower power) {

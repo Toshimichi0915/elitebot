@@ -6,15 +6,15 @@ import java.util.Set;
 
 public class DefaultEliteCommandProvider implements EliteCommandProvider {
 
-    private final Set<EliteCommand> cmds = new HashSet<>();
+    private final Set<EliteCommand> commands = new HashSet<>();
 
     public void addCommand(EliteCommand cmd) {
-        cmds.add(cmd);
+        commands.add(cmd);
     }
 
     @Override
     public EliteCommand getCommand(String prefix) {
-        for (EliteCommand cmd : cmds) {
+        for (EliteCommand cmd : commands) {
             if (cmd.getPrefix().equals(prefix))
                 return cmd;
         }
@@ -23,6 +23,6 @@ public class DefaultEliteCommandProvider implements EliteCommandProvider {
 
     @Override
     public Collection<EliteCommand> getCommands() {
-        return new HashSet<>(cmds);
+        return new HashSet<>(commands);
     }
 }

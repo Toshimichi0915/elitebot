@@ -18,7 +18,7 @@ public class StatusListCommand implements EliteCommand, CommandDescription {
 
     @Override
     public String getPrefix() {
-        return "stlist";
+        return "sl";
     }
 
     private int countMembers(EliteStatus status) {
@@ -30,11 +30,11 @@ public class StatusListCommand implements EliteCommand, CommandDescription {
     public void execute(EliteUser user, String[] args) {
         List<EliteStatus> statuses = new ArrayList<>(bot.getEliteStatusProvider().getEliteStatuses());
         if (statuses.size() == 0) {
-            user.sendMessage("現在有効な状態は存在しません");
+            user.sendMessage("現在有効なステータスは存在しません");
             return;
         }
         statuses.sort((e1, e2) -> Integer.compare(countMembers(e2), countMembers(e1)));
-        StringBuilder builder = new StringBuilder("現在の状態一覧:\n");
+        StringBuilder builder = new StringBuilder("現在のステータス一覧:\n");
         for (EliteStatus status : statuses) {
             builder.append(countMembers(status));
             builder.append("人: ");
@@ -46,6 +46,6 @@ public class StatusListCommand implements EliteCommand, CommandDescription {
 
     @Override
     public String getDescription() {
-        return "状態の一覧を表示します";
+        return "ステータスの一覧を表示します";
     }
 }

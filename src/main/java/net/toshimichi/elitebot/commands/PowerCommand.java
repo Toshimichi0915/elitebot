@@ -4,11 +4,11 @@ import net.toshimichi.elitebot.EliteBot;
 import net.toshimichi.elitebot.discord.ElitePower;
 import net.toshimichi.elitebot.discord.EliteUser;
 
-public class PowerChangeCommand implements EliteCommand, CommandDescription {
+public class PowerCommand implements EliteCommand, CommandDescription {
 
     private final EliteBot bot;
 
-    public PowerChangeCommand(EliteBot bot) {
+    public PowerCommand(EliteBot bot) {
         this.bot = bot;
     }
 
@@ -20,6 +20,10 @@ public class PowerChangeCommand implements EliteCommand, CommandDescription {
     @Override
     public void execute(EliteUser user, String[] args) {
         if (args.length < 1) {
+            if(user.getElitePower() != null) {
+                user.setElitePower(null);
+                user.sendMessage("勢力から脱退しました");
+            }
             user.sendMessage("変更する勢力を指定してください");
             return;
         }

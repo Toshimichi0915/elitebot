@@ -33,7 +33,7 @@ public class PowerAddCommand extends AdminCommand implements CommandDescription{
 
     @Override
     public String getPrefix() {
-        return "ppadd";
+        return "pa";
     }
 
     @Override

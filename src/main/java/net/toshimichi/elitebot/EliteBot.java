@@ -36,14 +36,13 @@ public class EliteBot {
         powers = new JDAElitePowerProvider(jda, powerSave.getEliteSimpleData());
         statuses = new JDAEliteStatusProvider(jda, statusSave.getEliteSimpleData());
         DefaultEliteCommandProvider provider = new DefaultEliteCommandProvider();
-        provider.addCommand(new PowerChangeCommand(this));
+        provider.addCommand(new PowerCommand(this));
         provider.addCommand(new ShutdownCommand(this));
         provider.addCommand(new PowerAddCommand(this));
         provider.addCommand(new PowerRemoveCommand(this));
-        provider.addCommand(new PowerReleaseCommand());
         provider.addCommand(new PowerListCommand(this));
-        provider.addCommand(new StatusAddChangeCommand(this));
-        provider.addCommand(new StatusReleaseChangeCommand(this));
+        provider.addCommand(new StatusCommand(this));
+        provider.addCommand(new StatusClearCommand(this));
         provider.addCommand(new StatusAddCommand(this));
         provider.addCommand(new StatusListCommand(this));
         provider.addCommand(new StatusRemoveCommand(this));
