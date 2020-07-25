@@ -15,7 +15,7 @@ import java.io.File;
 public class EliteBot {
 
     private final JDA jda;
-    private final TextChannel channel;
+    private final String channelId;
     private final ElitePowerProvider powers;
     private final EliteStatusProvider statuses;
     private final EliteCommandProvider provider;
@@ -26,7 +26,7 @@ public class EliteBot {
 
     public EliteBot(String accessToken, String channelId, File powerFile, File statusFile, String adminRoleName) throws LoginException, InterruptedException {
         jda = new JDABuilder(accessToken).buildBlocking();
-        channel = jda.getTextChannelById(channelId);
+        this.channelId = channelId;
         this.powerFile = powerFile;
         this.statusFile = statusFile;
         EliteSaveSystem powerSave = new FileEliteSaveSystem(powerFile);
@@ -80,7 +80,7 @@ public class EliteBot {
     }
 
     public TextChannel getTextChannel() {
-        return channel;
+        return jda.getTextChannelById(channelId);
     }
 
     public ElitePowerProvider getElitePowerProvider() {

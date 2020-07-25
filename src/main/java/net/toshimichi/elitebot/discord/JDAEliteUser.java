@@ -84,7 +84,6 @@ public class JDAEliteUser implements EliteUser {
 
     @Override
     public void sendMessage(String message) {
-//        bot.getTextChannel().sendMessage(member.getAsMention() + " " + message).queue();
         bot.getTextChannel().sendMessage(message).queue();
     }
 
