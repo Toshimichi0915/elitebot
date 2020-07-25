@@ -11,6 +11,7 @@ import net.toshimichi.elitebot.save.FileEliteSaveSystem;
 
 import javax.security.auth.login.LoginException;
 import java.io.File;
+import java.util.List;
 
 public class EliteBot {
 
@@ -20,7 +21,7 @@ public class EliteBot {
     private final EliteStatusProvider statuses;
     private final EliteCommandProvider provider;
     private final EliteReceiver receiver;
-    private final Role adminRole;
+    private final String adminRoleName;
     private final File powerFile;
     private final File statusFile;
 
@@ -42,14 +43,13 @@ public class EliteBot {
         provider.addCommand(new PowerRemoveCommand(this));
         provider.addCommand(new PowerListCommand(this));
         provider.addCommand(new StatusCommand(this));
-        provider.addCommand(new StatusClearCommand(this));
         provider.addCommand(new StatusAddCommand(this));
         provider.addCommand(new StatusListCommand(this));
         provider.addCommand(new StatusRemoveCommand(this));
         provider.addCommand(new HelpCommand(this));
         this.provider = provider;
         receiver = new JDAEliteReceiver(this);
-        adminRole = jda.getRolesByName(adminRoleName, true).get(0);
+        this.adminRoleName = adminRoleName;
 
         receiver.addListener(new JDACommandEliteListener(this));
         jda.addEventListener(receiver);
@@ -95,8 +95,8 @@ public class EliteBot {
         return provider;
     }
 
-    public Role getAdminRole() {
-        return adminRole;
+    public List<Role> getAdminRoles() {
+        return jda.getRolesByName(adminRoleName, true);
     }
 
     public EliteReceiver getEliteReceiver() {

@@ -37,6 +37,6 @@ public class StatusRemoveCommand extends AdminCommand implements CommandDescript
 
     @Override
     public String getDescription() {
-        return "ステータスを解除します";
+        return "ステータスを削除します";
     }
 }

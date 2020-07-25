@@ -20,11 +20,12 @@ public class PowerCommand implements EliteCommand, CommandDescription {
     @Override
     public void execute(EliteUser user, String[] args) {
         if (args.length < 1) {
-            if(user.getElitePower() != null) {
+            if (user.getElitePower() != null) {
                 user.setElitePower(null);
                 user.sendMessage("勢力から脱退しました");
+            } else {
+                user.sendMessage("変更する勢力を指定してください");
             }
-            user.sendMessage("変更する勢力を指定してください");
             return;
         }
         String powerName = link(args, 0, args.length);
@@ -39,6 +40,6 @@ public class PowerCommand implements EliteCommand, CommandDescription {
 
     @Override
     public String getDescription() {
-        return "勢力を変更します";
+        return "勢力を変更, もしくは勢力から脱退します";
     }
 }

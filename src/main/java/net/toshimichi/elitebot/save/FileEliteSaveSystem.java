@@ -2,6 +2,7 @@ package net.toshimichi.elitebot.save;
 
 import java.io.*;
 import java.util.HashSet;
+import java.util.Properties;
 import java.util.Set;
 
 public class FileEliteSaveSystem implements EliteSaveSystem {
@@ -14,17 +15,13 @@ public class FileEliteSaveSystem implements EliteSaveSystem {
         this.data = new HashSet<>();
     }
 
-    private String unescape(String str) {
-        return str.replace("\\:", ":");
-    }
-
     @Override
     public void save() {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
-            for (EliteSimpleData element : data) {
-                writer.write(unescape(element.getName()) + "[^\\\\]:" + unescape(element.getId()));
-                writer.newLine();
-            }
+        Properties properties = new Properties();
+        for(EliteSimpleData element : data)
+            properties.setProperty(element.getName(), element.getId());
+        try(FileWriter writer = new FileWriter(file)) {
+            properties.store(writer, null);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -33,15 +30,16 @@ public class FileEliteSaveSystem implements EliteSaveSystem {
     @Override
     public void load() {
         data.clear();
-        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
-            String line;
-            while ((line = reader.readLine()) != null && !line.equals("")) {
-                String[] split = line.split("[^\\\\]:");
-                data.add(new DefaultEliteSimpleData(unescape(split[0]), unescape(split[1])));
-            }
+        Properties properties = new Properties();
+        try(FileReader reader = new FileReader(file)) {
+            properties.load(reader);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        Set<String> keys = properties.stringPropertyNames();
+        for(String key : keys)
+            data.add(new DefaultEliteSimpleData(key, properties.getProperty(key)));
     }
 
     @Override

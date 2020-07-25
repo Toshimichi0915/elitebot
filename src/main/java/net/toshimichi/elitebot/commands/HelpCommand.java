@@ -37,7 +37,7 @@ public class HelpCommand implements EliteCommand, CommandDescription {
         }
 
         EliteCommand cmd = prov.getCommand(args[0]);
-        if (cmd == null || !(cmd instanceof CommandDescription)) {
+        if (!(cmd instanceof CommandDescription)) {
             user.sendMessage("そのコマンドのヘルプは存在しません: " + args[0]);
             return;
         }

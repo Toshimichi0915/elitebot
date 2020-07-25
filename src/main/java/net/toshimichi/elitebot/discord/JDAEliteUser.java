@@ -104,6 +104,11 @@ public class JDAEliteUser implements EliteUser {
 
     @Override
     public boolean isAdmin() {
-        return member.getRoles().contains(bot.getAdminRole());
+        List<Role> adminRoles = bot.getAdminRoles();
+        for (Role role : member.getRoles()) {
+            if (adminRoles.contains(role))
+                return true;
+        }
+        return false;
     }
 }
